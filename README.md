@@ -35,42 +35,50 @@ cd ore-cli
 cargo build --release
 cd target/release/
 
+git clone https://github.com/MrHat365/ore-python.git
+生成你需要的钱包私钥数量
+在create_account.py文件中
+asyncio.run(create_account(5, file_name="account.txt"))
+
+对应的钱包地址会出现在wallets/account.txt中。格式为  [地址,私钥]
+
+往需要执行的地址充值0.04个sol。
+然后执行如下命令：
+python start.py
 ```
 
-`wallets.txt`是需要填写转出目标地址列表，一行一个。
+```python
+import subprocess
 
-## 👨‍💻更新功能 [OKX注册地址](https://www.ouxyi.style/join/TOTHEMOON25)
-更新交易所提现-划转功能。
+# RPC地址可以通过一下注册获取 https://www.alchemy.com/，申请solana的地址
+# 私钥通过刚才生成的wallets/account.txt获取对应的私钥，粘贴进来。
+d = [
+    "../ore --rpc 你自己的RPC地址 --keypair 私钥 --priority-fee 5000000 mine --threads 20",
+    "../ore --rpc 你自己的RPC地址 --keypair 私钥 --priority-fee 5000000 mine --threads 20",
+    "../ore --rpc 你自己的RPC地址 --keypair 私钥 --priority-fee 5000000 mine --threads 20",
+    "../ore --rpc 你自己的RPC地址 --keypair 私钥 --priority-fee 5000000 mine --threads 20",
+    "../ore --rpc 你自己的RPC地址 --keypair 私钥 --priority-fee 5000000 mine --threads 20",
+    "../ore --rpc 你自己的RPC地址 --keypair 私钥 --priority-fee 5000000 mine --threads 20",
+]
 
-- 更新交易所提现时候出现的异常处理
-- 更新钱包多余资产转回交易所功能
-
-参数说明：
-```shell
-交易所私钥配置参数：
-API_KEY = ''  # 交易所api key
-SECRET = ''  # 交易所 api secret
-PASSPHRASE = ''  # okx交易所 passphrase
-
-从交易所转出，公链配置参数
-TOKEN = 'ZETA'  # token种类
-NETWORK = 'ZetaChain'  # 公链名称
-
-AMOUNT = 2  # 需要转出的zeta数量，okx当前默认为2个，也可以自定义
-
-划转延时配置参数
-MIN_DELAY = 20  # token提现最小延时时间
-MAX_DELAY = 50  # token提现最大延时时间
-
-多余资产转回交易所配置参数
-RESERVED_AMOUNT = 0.1  # 钱包需要保留的token数量
-EXCHANGE_ADDRESS = ""  # 需要转到交易所的充币地址
-
+while True:
+    for item in d:
+        try:
+            subprocess.call(f"{item}", shell=True)
+            
+            # subprocess.Popen(d).wait()
+            """
+                subprocess.Popen说明：
+                subprocess.call方法是，一行一行的执行，也就是，一个任务完成了再去完成下一个任务。
+                Popen方法则不同，他会同时执行d列表中的所有任务，针对多现成模式来说，需要更高的电脑配置，以及性能要求。所以慎用。会卡！
+                由于ore是每分钟只能mint一次，所以如果使用Popen方法需要携带等待时间。time.sleep(60)
+            """
+        except:
+            pass
 ```
-新增`data/temp_wallets.txt`文件，辅助交易所转账，可以将需要转回交易所的钱包私钥放置在对应的文件中，方便自动转回。
 
-### 注意：okx提现需要添加地址白名单，这里只能手动添加。无法自动完成。添加玩白名单之后才可以进行脚本操作。
-
+针对多个RPC的配置说明。
+你可以复制多个start.py文件，通过不同的配置来实现。每个start.py文件都配置不同的rpc，使用方法都是`python start.py`
 
 
 ### 🐹 更多其他脚本请关注首页

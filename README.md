@@ -92,6 +92,17 @@ root     2411536  0.0  0.0  17808  9432 pts/15   S+   12:02   0:00 python3 strar
 ```
 类似于上方的终端命令，这里是需要使用`kill -9 2411340 2411375 2411447 2411482`回车即可。
 
+```shell
+新增批处理命令，正对windows用户，有的不会编译，直接使用exe文件，通过批处理命令来执行。
+一个私钥一个文件，命令是右键新建文本，xxx.bat
+节点——换成自己的节点
+私钥——换成你自己的私钥
+@echo off
+for /l %%i in (1, 1, 100) do (
+    ore --rpc 节点 --keypair 私钥 --priority-fee 5000000 mine --threads 50
+)
+pause
+```
 
 ### 🐹 更多其他脚本请关注首页
 #### [Sollong脚本](https://github.com/MrHat365/sollong_daily_task.git)

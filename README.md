@@ -79,7 +79,7 @@ while True:
 
 针对多个RPC的配置说明。
 你可以复制多个start.py文件，通过不同的配置来实现。每个start.py文件都配置不同的rpc，使用方法都是`python start.py`
-
+## 更新一
 ### 补充一点，很多人反应，while True 快捷键很难停掉
 这里补充一下，可以使用 `ps -aux | grep python` 就可以看到
 ```shell
@@ -92,6 +92,7 @@ root     2411536  0.0  0.0  17808  9432 pts/15   S+   12:02   0:00 python3 strar
 ```
 类似于上方的终端命令，这里是需要使用`kill -9 2411340 2411375 2411447 2411482`回车即可。
 
+## 更新二
 ```shell
 新增批处理命令，正对windows用户，有的不会编译，直接使用exe文件，通过批处理命令来执行。
 一个私钥一个文件，命令是右键新建文本，xxx.bat
@@ -103,6 +104,33 @@ for /l %%i in (1, 1, 100) do (
 )
 pause
 ```
+## 更新三
+```shell
+新增批处理命令claim，新建xxx.bat文件，复制一下命令到文本。
+如果有多个钱包就复制多行，如果就一个钱包就保留一行。
+@echo off
+for /l %%i in (1, 1, 100) do (
+    ore --rpc 节点 --keypair 私钥 claim
+    ore --rpc 节点 --keypair 私钥 claim
+    ore --rpc 节点 --keypair 私钥 claim
+    ore --rpc 节点 --keypair 私钥 claim
+    ore --rpc 节点 --keypair 私钥 claim
+    ore --rpc 节点 --keypair 私钥 claim
+    ore --rpc 节点 --keypair 私钥 claim
+    ore --rpc 节点 --keypair 私钥 claim
+    ore --rpc 节点 --keypair 私钥 claim
+    ore --rpc 节点 --keypair 私钥 claim
+    ore --rpc 节点 --keypair 私钥 claim
+    ore --rpc 节点 --keypair 私钥 claim
+    ore --rpc 节点 --keypair 私钥 claim
+    ore --rpc 节点 --keypair 私钥 claim
+    ore --rpc 节点 --keypair 私钥 claim
+    ore --rpc 节点 --keypair 私钥 claim
+    ore --rpc 节点 --keypair 私钥 claim
+)
+pause
+```
+
 
 ### 🐹 更多其他脚本请关注首页
 #### [Sollong脚本](https://github.com/MrHat365/sollong_daily_task.git)
